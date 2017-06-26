@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreLocation
 
-class CurrentLocationViewController: UIViewController {
+class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
 	
-	
+	// iinitialize an instance of CLLocationManager
+	let locationManger = CLLocationManager()
 
 	@IBOutlet weak var messageLabel: UILabel!
 	@IBOutlet weak var latitudeLabel: UILabel!
@@ -24,6 +26,18 @@ class CurrentLocationViewController: UIViewController {
 	
 	@IBAction func getMyLocation(_ sender: Any) {
 		
+		//		authorization
+		let authStatus = CLLocationManager.authorizationStatus()
+		
+		if authStatus == .notDetermined {
+			
+			locationManger.requestWhenInUseAuthorization()
+			return
+		}
+		
+		locationManger.delegate = self
+		locationManger.desiredAccuracy = kCLLocationAccuracyBest
+		locationManger.startUpdatingLocation()
 	}
 	
 	
@@ -34,9 +48,19 @@ class CurrentLocationViewController: UIViewController {
 
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 
+	
+	//	MARK -- CoreLocationManagerDelegate functions
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		let newLocation = locations.last!
+		print("did update locations \(newLocation)")
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		print("did fail with error \(error)")
+	}
 
+	
 }
 
