@@ -31,8 +31,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 		let authStatus = CLLocationManager.authorizationStatus()
 		
 		if authStatus == .notDetermined {
-			
 			locationManger.requestWhenInUseAuthorization()
+			return
+		}
+		if authStatus == .denied || .restricted {
+			showLocationServicesDeniedAlert()
 			return
 		}
 		
@@ -44,7 +47,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		// insert any logic to occur when view first loads
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -64,7 +67,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	}
 
 	
-	func showLocationServicesDenied() {
+	func showLocationServicesDeniedAlert() {
 		
 		let alert = UIAlertController(title: "Location Services Disabled",
 		                              message: "Please enable location services for this app in Settings.",
