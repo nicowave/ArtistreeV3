@@ -18,6 +18,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	@IBOutlet weak var latitudeLabel: UILabel!
 	@IBOutlet weak var longitudeLabel: UILabel!
 	@IBOutlet weak var addressLabel: UILabel!
+
 	@IBOutlet weak var tagButton: UIButton!
 	@IBOutlet weak var getButton: UIButton!
 
@@ -50,6 +51,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 		super.didReceiveMemoryWarning()
 	}
 
+	
 	
 	//	MARK -- CoreLocationManagerDelegate functions
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
