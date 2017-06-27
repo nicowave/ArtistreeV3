@@ -15,9 +15,11 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	let locationManager = CLLocationManager()
 	
 	//	new instance variable to store current location in
-	var location = CLLocation()
+	var location: CLLocation?
+	
 	//	initialize a variable of type boolean to false to monitor when location is being mointored
 	var updatingLocation = false
+	
 	//	varible to monitor location errors
 	var lastLocationError: Error?
 
@@ -52,6 +54,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 		updateLabels()
 	}
 
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 	}
@@ -59,13 +62,35 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	
 	
 	//	MARK -- CoreLocationManagerDelegate functions
+	//	...didUpdateLocations
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		
 		let newLocation = locations.last!
 			print("did update locations \(newLocation)")
-		location = newLocation
-		lastLocationError = nil
-		updateLabels()
+		//		1
+		if newLocation.timestamp.timeIntervalSinceNow < -5 {
+			return
+		}
+		//		2
+		if newLocation.horizontalAccuracy < 0 {
+			return
+		}
+		//		3
+		if location == nil || location!.horizontalAccuracy > newLocation.horizontalAccuracy {
+		
+			//		4
+			lastLocationError = nil
+			location = newLocation
+			updateLabels()
+			
+			if newLocation.horizontalAccuracy <= locationManager.desiredAccuracy {
+				print("sufficient horizontal accuracy achieved!\n")
+				stopLocationManager()
+			}
+		}
+	//	END of locationManager(...didUpdateLocations) func
 	}
+	
 	
 	
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -83,13 +108,14 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	
 	func updateLabels() {
 		//		if there is a 'last location' value in 'location'
-		if location == location {
+		if let location = location {
 			latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
 			longitudeLabel.text = String(format: "%.8f", location.coordinate.longitude)
 			tagButton.isHidden = false
 			messageLabel.text = ""
 		//	else, if there are no location's or there was an 'error'
 		} else {
+			
 			latitudeLabel.text = ""
 			longitudeLabel.text = ""
 			addressLabel.text = ""
@@ -118,12 +144,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	
 	
 	
-	
+
 	//	MARK: 'stop' and 'start' fucntion
 	func startLocationManager() {
 		if CLLocationManager.locationServicesEnabled() {
 			locationManager.delegate = self
-			locationManager.desiredAccuracy = kCLLocationAccuracyBest
+			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 			locationManager.startUpdatingLocation()
 			updatingLocation = true
 		}
@@ -151,6 +177,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 		alert.addAction(okAction)
 		present(alert, animated: true, completion: nil)
 	}
+	
 // END of CurrentLocationViewController
 }
 
