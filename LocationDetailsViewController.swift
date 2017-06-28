@@ -37,6 +37,11 @@ class LocationDetailsViewController: UITableViewController {
 	}
 	
 	
+	//	'viewDidLoad'
+	//
+	//
+	//
+	//
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		descriptionTextView.text = ""
@@ -52,10 +57,37 @@ class LocationDetailsViewController: UITableViewController {
 		}
 	}
 
-	
+	//	MARK 'UITableViewDelgate'
+	//		
+	//	
+	//	
+	//	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		
+		if indexPath.section == 0 && indexPath.row == 0 {
+			return 88
+			
+		} else if indexPath.section == 4 && indexPath.row == 0 {
+			
+			addressDetailLabel.frame.size = CGSize(
+				width: view.bounds.size.width - 115,
+				height: 10000)
+			addressDetailLabel.sizeToFit()
+			addressDetailLabel.frame.origin.x = view.bounds.size.width - addressDetailLabel.frame.size.width - 15
+			return addressDetailLabel.frame.size.height + 20
+			
+		} else {
+			return 44
+		}
+	}
 
 	
 	
+	
+	
+	
+	
+
 	@IBAction func postToPublicMap(_ sender: Any) {
 		
 	}
