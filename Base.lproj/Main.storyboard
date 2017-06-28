@@ -37,7 +37,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address goes here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9v-Sy-Lwy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address goes here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r9v-Sy-Lwy">
                                 <rect key="frame" x="16" y="198" width="288" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="oZA-kW-eBv"/>
@@ -79,7 +79,6 @@
                                 <rect key="frame" x="107" y="481" width="107" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lP2-Ev-hua"/>
-                                    <constraint firstAttribute="width" constant="107" id="tPS-28-BZI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Get My Location"/>
@@ -107,12 +106,11 @@
                             <constraint firstItem="6cE-zB-c4v" firstAttribute="top" secondItem="YOi-VX-hgB" secondAttribute="bottom" constant="49" id="O89-Xn-E2n"/>
                             <constraint firstItem="X1s-4s-ebQ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="115" id="QIb-TL-H0P"/>
                             <constraint firstAttribute="trailing" secondItem="r9v-Sy-Lwy" secondAttribute="trailing" constant="16" id="TQf-0a-E5I"/>
+                            <constraint firstItem="Fvz-VE-rR7" firstAttribute="centerX" secondItem="X1s-4s-ebQ" secondAttribute="centerX" id="XWx-vJ-YXT"/>
                             <constraint firstItem="czx-BV-6nl" firstAttribute="top" secondItem="YOi-VX-hgB" secondAttribute="bottom" constant="49" id="ZmN-XY-0OW"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="Fvz-VE-rR7" secondAttribute="bottom" constant="8" id="dLE-R9-SrN"/>
                             <constraint firstItem="6cE-zB-c4v" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="52" id="ffa-pG-iLr"/>
-                            <constraint firstItem="Fvz-VE-rR7" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="107" id="iCA-z8-PYb"/>
                             <constraint firstItem="0cF-JB-KUu" firstAttribute="top" secondItem="6cE-zB-c4v" secondAttribute="bottom" constant="17" id="j9y-RC-laG"/>
-                            <constraint firstAttribute="trailing" secondItem="Fvz-VE-rR7" secondAttribute="trailing" constant="106" id="qxg-d3-dhA"/>
                             <constraint firstItem="0cF-JB-KUu" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="52" id="tjg-a5-5Gs"/>
                             <constraint firstItem="Gt7-3u-OJ1" firstAttribute="top" secondItem="czx-BV-6nl" secondAttribute="bottom" constant="17" id="u2g-MZ-9tv"/>
                             <constraint firstItem="YOi-VX-hgB" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="wvu-9x-Imq"/>
