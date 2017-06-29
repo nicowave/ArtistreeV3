@@ -32,6 +32,8 @@ class LocationDetailsViewController: UITableViewController {
 		return formatter
 	}()
 	
+	
+	
 	func format(date: Date) -> String {
 		return dateFormatter.string(from: date)
 	}
@@ -81,13 +83,11 @@ class LocationDetailsViewController: UITableViewController {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
 
+	//
+	//
+	//
+	//
 	@IBAction func postToPublicMap(_ sender: Any) {
 		
 	}
