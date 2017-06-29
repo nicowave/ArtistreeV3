@@ -32,8 +32,6 @@ class LocationDetailsViewController: UITableViewController {
 		return formatter
 	}()
 	
-	
-	
 	func format(date: Date) -> String {
 		return dateFormatter.string(from: date)
 	}
@@ -150,6 +148,35 @@ class LocationDetailsViewController: UITableViewController {
 		}
 		return line1 + "\n" + line2
 	}
-
 	
+	
+	// HTTP requests
+	//
+	//	
+	//	
+	//
+	private func dataTask(request: URLRequest, method: String, completion: @escaping (Bool, AnyObject?) -> ()) {
+		
+		var method = request.httpMethod
+		
+		let session = URLSession(configuration: URLSessionConfiguration.default)
+		
+		session.dataTask(with: request) { (data, response, error) in
+			
+			
+			if let data = data {
+				
+				let json = try? JSONSerialization.jsonObject(with: data, options: []) as AnyObject
+				
+				if let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode {
+					
+					completion(true, json)
+					
+				} else {
+					
+					completion(false, json)
+				}
+			}
+		}.resume()
+	}
 }
