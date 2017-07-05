@@ -53,17 +53,14 @@ class VenuesNearMePickerController: UITableViewController {
 	}
 
 	
-	
 	// 'cellForRowAt indexPath'
 	//
 	//
 	//
 	//
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-		
 		let venue = venues[indexPath.row]
+		var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
 		
 		if !(cell != nil) {
 			cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
@@ -71,8 +68,6 @@ class VenuesNearMePickerController: UITableViewController {
 		
 		cell?.textLabel?.text = venue
 		//	cell?.detailTextLabel?.text = self.coords[indexPath.row]
-		
-		
 		if venue == selectedVenueName {
 			cell?.accessoryType = .checkmark
 		} else {
@@ -99,16 +94,6 @@ class VenuesNearMePickerController: UITableViewController {
 			selectedIndexPath = indexPath
 		}
 	}
-	
-	
-	//	'loadNearestVenues'
-	//
-	//
-	//
-	//
-//	func loadVenues(coordinate: CLLocationCoordinate2D) -> Void {
-//	
-//}
 
 	
 }
