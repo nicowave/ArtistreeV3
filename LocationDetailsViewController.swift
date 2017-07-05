@@ -103,7 +103,7 @@ class LocationDetailsViewController: UITableViewController {
 		if segue.identifier == "NearestVenuesSegue" {
 			let controller = segue.destination as! VenuesNearMePickerController
 			controller.coordinate = self.coordinate
-			controller.selectedVenueName = venueName
+			//controller.selectedVenueName = venueName
 		}
 	}
 
