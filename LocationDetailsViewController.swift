@@ -13,6 +13,7 @@ class LocationDetailsViewController: UITableViewController {
 	
 	var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 	var placemark: CLPlacemark?
+	var venueName = "Check-in to Art Venues Near You..."
 	
 	@IBOutlet weak var descriptionTextView: UITextView!
 	@IBOutlet weak var postToPublicMapSwitch: UISwitch!
@@ -25,6 +26,7 @@ class LocationDetailsViewController: UITableViewController {
 	@IBOutlet weak var longitudeDetailLabel: UILabel!
 	@IBOutlet weak var dateDetailLabel: UILabel!
 	
+	
 	private let dateFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateStyle = .medium
@@ -32,9 +34,11 @@ class LocationDetailsViewController: UITableViewController {
 		return formatter
 	}()
 	
+	
 	func format(date: Date) -> String {
 		return dateFormatter.string(from: date)
 	}
+	
 	
 	
 	//	'viewDidLoad'
@@ -44,10 +48,17 @@ class LocationDetailsViewController: UITableViewController {
 	//
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		artVenueLabel.text = venueName
+		
+		let latitudeString = String(format: "%.8f", coordinate.latitude)
+		let longitudeString = String(format: "%.8f", coordinate.longitude)
+		
 		descriptionTextView.text = ""
 		artVenueLabel.text = ""
-		latitudeDetailLabel.text = String(format: "%.8f", coordinate.latitude)
-		longitudeDetailLabel.text = String(format: "%.8f", coordinate.longitude)
+		latitudeDetailLabel.text = latitudeString
+		longitudeDetailLabel.text = longitudeString
+		
 		dateDetailLabel.text = format(date: Date())
 		
 		if let placemark = placemark {
@@ -80,31 +91,40 @@ class LocationDetailsViewController: UITableViewController {
 			return 44
 		}
 	}
+	
+	
+	//	Segue for 'VenuesNearMeViewCOntroller'
+	//
+	//
+	//
+	//
+	//
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "NearestVenuesSegue" {
+			let controller = segue.destination as! VenuesNearMePickerController
+			controller.coordinate = self.coordinate
+			controller.selectedVenueName = venueName
+		}
+	}
 
-
+	
+	
+	//	IBAction functions
 	//
 	//
 	//
 	//
 	@IBAction func postToPublicMap(_ sender: Any) {
-		
 	}
-	
 
 	@IBAction func postToFavorites(_ sender: Any) {
-		
 	}
-	
-	
+
 	@IBAction func postAsCustomLocation(_ sender: Any) {
-		
 	}
-	
 	
 	@IBAction func artVenueCheckIn(_ sender: Any) {
-		
 	}
-	
 	
 	@IBAction func cancel() {
 		dismiss(animated: true, completion: nil)
@@ -112,13 +132,11 @@ class LocationDetailsViewController: UITableViewController {
 	
 	@IBAction func done() {
 		dismiss(animated: true, completion: nil)
-
 	}
-	
 	
 	@IBAction func submitPostButton(_ sender: Any) {
-		
 	}
+	
 	
 	
 	//	'string'
@@ -127,10 +145,8 @@ class LocationDetailsViewController: UITableViewController {
 	//
 	//
 	func string(from placemark: CLPlacemark) -> String {
-		
 		var line1 = ""
 		var line2 = ""
-		
 		if let s = placemark.subThoroughfare {
 			line1 += s + " "
 		}
@@ -149,34 +165,4 @@ class LocationDetailsViewController: UITableViewController {
 		return line1 + "\n" + line2
 	}
 	
-	
-	// HTTP requests
-	//
-	//	
-	//	
-	//
-	private func dataTask(request: URLRequest, method: String, completion: @escaping (Bool, AnyObject?) -> ()) {
-		
-		var method = request.httpMethod
-		
-		let session = URLSession(configuration: URLSessionConfiguration.default)
-		
-		session.dataTask(with: request) { (data, response, error) in
-			
-			
-			if let data = data {
-				
-				let json = try? JSONSerialization.jsonObject(with: data, options: []) as AnyObject
-				
-				if let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode {
-					
-					completion(true, json)
-					
-				} else {
-					
-					completion(false, json)
-				}
-			}
-		}.resume()
-	}
 }
