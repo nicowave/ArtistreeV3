@@ -37,7 +37,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	@IBOutlet weak var getButton: UIButton!
 	
 	
-	
 	@IBAction func getMyLocation(_ sender: Any) {
 		//	authorization of enabling location-services
 		let authStatus = CLLocationManager.authorizationStatus()
@@ -99,6 +98,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 			controller.coordinate = location!.coordinate
 			controller.placemark = placemark
 		}
+		
 	}
 	
 	

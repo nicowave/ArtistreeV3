@@ -13,7 +13,8 @@ class LocationDetailsViewController: UITableViewController {
 	
 	var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
 	var placemark: CLPlacemark?
-	var venueName = "Check-in to Art Venues Near You..."
+//	var venueName = "Check-in to Art Venues Near You..."
+	var selectedVenueName = "Art Venues Near You..."
 	
 	@IBOutlet weak var descriptionTextView: UITextView!
 	@IBOutlet weak var postToPublicMapSwitch: UISwitch!
@@ -49,7 +50,7 @@ class LocationDetailsViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		artVenueLabel.text = venueName
+		artVenueLabel.text = selectedVenueName
 		
 		let latitudeString = String(format: "%.8f", coordinate.latitude)
 		let longitudeString = String(format: "%.8f", coordinate.longitude)
@@ -93,20 +94,21 @@ class LocationDetailsViewController: UITableViewController {
 	}
 	
 	
-	//	Segue for 'VenuesNearMeViewCOntroller'
-	//
-	//
-	//
-	//
-	//
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "NearestVenuesSegue" {
-			let controller = segue.destination as! VenuesNearMePickerController
-			controller.coordinate = self.coordinate
-			//controller.selectedVenueName = venueName
-		}
-	}
 
+	
+	//	'prepareForSegue' function transfers picked venue back to LocationDetailsViewControlller
+	//
+	//
+	//
+	//
+		override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+			if segue.identifier == "PickVenue" {
+				let controller = segue.destination as! VenuesNearMePickerController
+				controller.selectedVenueName = selectedVenueName
+				controller.coordinate = self.coordinate
+			}
+		}
+	
 	
 	
 	//	IBAction functions
@@ -114,6 +116,14 @@ class LocationDetailsViewController: UITableViewController {
 	//
 	//
 	//
+	@IBAction func venuesNearMePickerDidPickVenue(_ segue: UIStoryboardSegue) {
+		let controller = segue.source as! VenuesNearMePickerController
+		selectedVenueName = controller.selectedVenueName
+		artVenueLabel.text = selectedVenueName
+	}
+	
+	
+	
 	@IBAction func postToPublicMap(_ sender: Any) {
 	}
 
