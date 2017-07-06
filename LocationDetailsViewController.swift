@@ -50,13 +50,13 @@ class LocationDetailsViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		artVenueLabel.text = selectedVenueName
+		
 		
 		let latitudeString = String(format: "%.8f", coordinate.latitude)
 		let longitudeString = String(format: "%.8f", coordinate.longitude)
 		
 		descriptionTextView.text = ""
-		artVenueLabel.text = ""
+		artVenueLabel.text = "Art Venues Near You..."
 		latitudeDetailLabel.text = latitudeString
 		longitudeDetailLabel.text = longitudeString
 		
