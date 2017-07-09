@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 
+
 class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate {
 	
 	// iinitialize an instance of CLLocationManager
@@ -75,6 +76,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// insert any logic to occur when view first loads
+		
 		configureGetButton()
 		updateLabels()
 	}
@@ -263,7 +265,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
 	func startLocationManager() {
 		if CLLocationManager.locationServicesEnabled() {
 			locationManager.delegate = self
-			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+			locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
 			locationManager.startUpdatingLocation()
 			updatingLocation = true
 		}
