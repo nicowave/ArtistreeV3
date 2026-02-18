@@ -27,10 +27,6 @@ class HUDView: UIView {
 	}
 	
 	
-	
-	
-	
-	
 	override func draw(_ rect: CGRect) {
 		let boxWidth:  CGFloat = 96
 		let boxHeight: CGFloat = 96
